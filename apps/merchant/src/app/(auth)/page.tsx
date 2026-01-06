@@ -1,8 +1,14 @@
-import { redirect } from "next/navigation";
+"use client";
 
-// Force dynamic rendering to prevent Cardano library issues during build
-export const dynamic = "force-dynamic";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function AuthPage() {
-  redirect("/login");
+  const router = useRouter();
+
+  useEffect(() => {
+    router.replace("/login");
+  }, [router]);
+
+  return null;
 }
