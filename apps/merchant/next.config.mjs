@@ -3,7 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const withNextIntl = createNextIntlPlugin("./next-intl.config.ts");
+const withNextIntl = createNextIntlPlugin("./apps/merchant/next-intl.config.ts");
 
 
 const isProd = process.env.NODE_ENV === "production";
@@ -47,7 +47,7 @@ const nextConfig = {
   },
   experimental: {
     outputFileTracingIncludes: {
-      "/": ["./next-intl.config.ts"]
+      "/": ["./apps/merchant/next-intl.config.ts"],
     }
   },
   serverExternalPackages: [],
