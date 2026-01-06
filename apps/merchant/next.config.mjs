@@ -1,10 +1,11 @@
 import createNextIntlPlugin from "next-intl/plugin";
-import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const withNextIntl = createNextIntlPlugin("./next-intl.config.ts");
+const withNextIntl = createNextIntlPlugin(
+  path.join(__dirname, "next-intl.config.ts")
+);
 
 const isProd = process.env.NODE_ENV === "production";
 
@@ -44,6 +45,11 @@ const nextConfig = {
   transpilePackages: ["@repo/ui"],
   typescript: {
     ignoreBuildErrors: true,
+  },
+  experimental: {
+    outputFileTracingIncludes: {
+      "/": ["./next-intl.config.ts"]
+    }
   },
   serverExternalPackages: [],
   async headers() {
