@@ -1,6 +1,6 @@
 {
   "framework": "nextjs",
-  "rootDirectory": "apps/merchant",
   "installCommand": "pnpm install -w",
-  "buildCommand": "pnpm build"
+  "buildCommand": "pnpm --filter merchant... build",
+  "outputDirectory": "apps/merchant/.next"
 }
