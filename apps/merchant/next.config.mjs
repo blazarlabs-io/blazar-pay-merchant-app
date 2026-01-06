@@ -131,6 +131,9 @@ const securityHeaders = [
 const nextConfig = {
   reactStrictMode: true,
   transpilePackages: ["@repo/ui"],
+  experimental: {
+    externalDir: true,
+  },
   typescript: {
     ignoreBuildErrors: true,
   },
