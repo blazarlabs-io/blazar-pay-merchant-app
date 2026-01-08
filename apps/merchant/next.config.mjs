@@ -45,10 +45,8 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  experimental: {
-    outputFileTracingIncludes: {
-      "/": ["./next-intl.config.ts"],
-    }
+  outputFileTracingIncludes: {
+    "/": ["./next-intl.config.ts"],
   },
   serverExternalPackages: [],
   async headers() {
