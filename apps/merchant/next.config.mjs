@@ -3,7 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const withNextIntl = createNextIntlPlugin("./next-intl.config.ts");
+const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
 
 const isProd = process.env.NODE_ENV === "production";

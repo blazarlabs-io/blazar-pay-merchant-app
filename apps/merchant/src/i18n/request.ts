@@ -1,17 +1,24 @@
+import { headers } from "next/headers";
 import { getRequestConfig } from "next-intl/server";
-import { client } from "../lib/sanity/client";
+import { defaultLocale, locales, type Locale } from "./config";
+
+const isLocale = (value: string): value is Locale =>
+  (locales as readonly string[]).includes(value);
+
+function resolveLocaleFromHeaders(acceptLanguage: string | null): Locale {
+  if (!acceptLanguage) return defaultLocale;
+  const candidate = acceptLanguage.split(",")[0]?.split(";")[0]?.trim();
+  if (!candidate) return defaultLocale;
+  const base = candidate.toLowerCase().split("-")[0];
+  return isLocale(base) ? base : defaultLocale;
+}
 
 export default getRequestConfig(async () => {
-  // Provide a static locale, fetch a user setting,
-  // read from `cookies()`, `headers()`, etc.
-  const locale = "en";
-  const messages = {};
-
-  const publicPages = await client.fetch('*[_type == "publicPages"]');
-  publicPages.forEach((page: any) => {});
+  const h = await headers();
+  const resolvedLocale = resolveLocaleFromHeaders(h.get("accept-language"));
 
   return {
-    locale,
-    messages: (await import(`../../messages/${locale}.json`)).default,
+    locale: resolvedLocale,
+    messages: (await import(`../../messages/${resolvedLocale}.json`)).default,
   };
 });
