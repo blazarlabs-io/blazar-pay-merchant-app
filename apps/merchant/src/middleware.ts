@@ -28,7 +28,7 @@ function buildCsp(nonce: string) {
   const c = cspAllowlist;
 
   const scriptSrc = [
-    ...c.script,              // your allowlist
+    ...c.script,              // allowlist
     `'nonce-${nonce}'`,       // inject nonce
   ];
 
