@@ -2,9 +2,11 @@
   "name": "merchant",
   "version": "1.0.0",
   "private": true,
+  "packageManager": "pnpm@9.12.0",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:prod": "npx vercel build --prod",
     "start": "next start",
     "lint": "next lint",
     "type-check": "tsc --noEmit",
