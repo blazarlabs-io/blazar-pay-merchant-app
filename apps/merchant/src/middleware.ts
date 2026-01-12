@@ -4,6 +4,7 @@ import { checkIdToken } from "@/features/authentication/services";
 import { AUTH_COOKIE } from "@/features/authentication/data";
 import { CheckIdTokenResp } from "./features/authentication/types";
 import cspAllowlist from "../csp.allowlist.json";
+import { locales } from "@/i18n/config";
 
 /**
  * Edge-safe base64 nonce generator (middleware runs on the Edge runtime).
@@ -77,7 +78,7 @@ function withCsp(
   return res;
 }
 
-export async function middleware(request: NextRequest) {
+export default async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   const nonce = makeNonce();
@@ -85,8 +86,6 @@ export async function middleware(request: NextRequest) {
   // Forward nonce to the app via request headers
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set("x-nonce", nonce);
-
-  // Default response
   let response = NextResponse.next({
     request: { headers: requestHeaders },
   });
